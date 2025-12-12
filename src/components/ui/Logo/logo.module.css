@@ -1,0 +1,35 @@
+.logo {
+    height: 100%; 
+    width: 100%;  
+    min-width: 0;
+    min-height: 0;  
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    max-height:32svh;
+}
+
+.logoImg {
+  max-width: 100%;   /* Image will not exceed the width of its parent grid cell */
+  max-height: 100%;  /* Crucial: Image will not exceed the height of its parent grid cell */
+  width: auto;       /* Maintain aspect ratio by letting width adjust */
+  height: auto;      /* Maintain aspect ratio by letting height adjust */
+  object-fit: contain; /* Ensures the entire image is visible, scaling down if needed,
+                         without cropping or distorting. */
+  display: block;    /* Prevents extra space/issues sometimes caused by inline images */
+ 
+}
+
+.logoImgGame {
+    max-height: 18svh;
+    max-width: 100%;
+    object-fit: contain; 
+    width:100%;
+    height: auto;
+}
+
+@media( max-height:600px){
+    .logoImgGame{
+        max-height:15svh;
+    }
+}

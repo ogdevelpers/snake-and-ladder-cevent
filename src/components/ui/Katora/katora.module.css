@@ -1,0 +1,10 @@
+.katora{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.katoraImage{
+    max-width:80px;
+}

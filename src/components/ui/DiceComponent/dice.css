@@ -1,0 +1,186 @@
+/*
+    General Styles
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+/* Corrected width from 10ppx to 100% or a fixed px value if intended */
+.container {
+    display: grid;
+    place-items: center;
+    width: 100px; /* Changed from 10ppx (typo?) to 100% or set a specific px if needed */ 
+    background: blue;
+    box-shadow: 1.62px 1.08px 3.24px 0px #000000BF;
+    border: 1px solid #FFFFFF;
+    border-radius: 0.5rem;;
+    /* Add min-height or height to see the container if it's empty */
+    min-height: 110px; /* Added for visibility */
+    perspective: 800px; /* Added for proper 3D rendering */
+}
+
+/*
+    Dice Styles
+*/
+
+.dice {
+    position: relative;
+    width: 60px; /* REDUCED: Original 100px -> 60px */
+    height: 60px; /* REDUCED: Original 100px -> 60px */
+    transform-style: preserve-3d;
+    transition: 1s ease; /* This transition is for the final face snap */
+}
+
+/* The rolling animation needs to cover more ground for a smaller dice */
+@keyframes rolling {
+    0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+    100% {
+        /* Increased rotation values for a more pronounced spin on a smaller dice */
+        transform: rotateX(720deg) rotateY(720deg) rotateZ(360deg);
+    }
+}
+
+.rolling {
+    animation: rolling 1s cubic-bezier(0.1, 0.9, 0.2, 1) forwards; /* Smoother rolling */
+}
+
+
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px; /* REDUCED: Original 20px -> 10px */
+    border: 2px solid #f6f3f0; /* REDUCED: Original 5px -> 2px */
+    transform-style: preserve-3d;
+    background: linear-gradient(
+        145deg, #dddbd8, #fff
+    );
+}
+
+.face::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 10px; /* REDUCED: Original 20px -> 10px */
+    background: #f6f3f0;
+    transform: translateZ(-1px);
+}
+
+.face::after {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    width: 10px; /* REDUCED: Original 18px -> 10px */
+    height: 10px; /* REDUCED: Original 18px -> 10px */
+    border-radius: 50%;
+    background: #131210;
+}
+
+/* --- Face Positioning --- */
+/* These values should be half the new dice width/height */
+.front {
+    transform: translateZ(30px); /* REDUCED: Half of 60px */
+}
+
+.back {
+    transform: rotateX(180deg) translateZ(30px); /* REDUCED: Half of 60px */
+}
+
+.top {
+    transform: rotateX(90deg) translateZ(30px); /* REDUCED: Half of 60px */
+}
+
+.bottom {
+    transform: rotateX(-90deg) translateZ(30px); /* REDUCED: Half of 60px */
+}
+
+.right {
+    transform: rotateY(90deg) translateZ(30px); /* REDUCED: Half of 60px */
+}
+
+.left {
+    transform: rotateY(-90deg) translateZ(30px); /* REDUCED: Half of 60px */
+}
+
+/* --- Pip (dot) Sizing and Positioning --- */
+/* All margin values are adjusted relative to the new pip size (10px) and face size (60px) */
+.front::after {
+    width: 18px; /* REDUCED: Original 30px -> 18px */
+    height: 18px; /* REDUCED: Original 30px -> 18px */
+    background: #f63330;
+    margin: -9px 0 0 -9px; /* REDUCED: Half of new width/height */
+}
+
+.back::after {
+    /* Adjusted margins to maintain relative spacing for 5 pips */
+    margin: -18px 0 0 -18px; /* Adjusted from -35px -30px */
+    box-shadow: 20px 0, /* Adjusted from 40px */
+                0 12.5px, /* Adjusted from 25px */
+                20px 12.5px, /* Adjusted from 40px 25px */
+                0 25px, /* Adjusted from 50px */
+                20px 25px; /* Adjusted from 40px 50px */
+}
+
+.top::after {
+    /* Adjusted margins for 3 pips */
+    margin: -15px 0 0 -15px; /* Adjusted from -30px -30px */
+    box-shadow: 20px 20px; /* Adjusted from 40px 40px */
+}
+
+.bottom::after {
+    /* Adjusted margins for 4 pips */
+    margin: -18px 0 0 -18px; /* Adjusted from -36px -36px */
+    box-shadow: 13px 13px, /* Adjusted from 26px 26px */
+                26px 26px, /* Adjusted from 52px 52px */
+                26px 0, /* Adjusted from 52px 0 */
+                0 26px; /* Adjusted from 0 52px */
+}
+
+.right::after {
+    /* Adjusted margins for 5 pips (assuming a standard dice has 5 pips on the 3 face side if 3 is on right) */
+    /* If 3 has 3 pips, this should be adjusted to 3 pips layout */
+    margin: -15px 0 0 -15px; /* Adjusted from -30px -30px */
+    box-shadow: 20px 0, /* Adjusted from 40px */
+                0 20px, /* Adjusted from 40px */
+                20px 20px; /* Adjusted from 40px 40px */
+}
+
+.left::after {
+    /* Adjusted margins for 2 pips (assuming standard dice has 2 pips on the 4 face side if 4 is on left) */
+    /* If 4 has 4 pips, this should be adjusted to 4 pips layout */
+    margin: -18px 0 0 -18px; /* Adjusted from -35px -35px */
+    box-shadow: 13px 13px, /* Adjusted from 25px 25px */
+                26px 26px; /* Adjusted from 50px 50px */
+}
+
+
+/*
+    Roll Button styles - This section is now technically deprecated
+    if you removed the button in the JS component.
+    Keeping it for reference, but it won't be used if the button is gone.
+*/
+
+.roll {
+    cursor: pointer;
+    color: #b33951;
+    margin-top: 60px;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font: 700 16px 'Montserrat';
+    border: 2px solid #b33951;
+    transition: .4s;
+    /* This button is likely removed from the JS component now */
+    display: none; /* Hide it if you want to keep the CSS but not display */
+}
+
+.roll:hover {
+    color: #fff;
+    background: #b33951;
+}

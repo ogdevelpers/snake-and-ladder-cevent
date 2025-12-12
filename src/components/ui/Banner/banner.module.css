@@ -1,0 +1,5 @@
+.bannerImage{
+    object-fit: contain;
+    max-height: 12vh;
+    width:auto;
+}
