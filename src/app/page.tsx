@@ -28,8 +28,8 @@ const HomePage = () => {
                 </div>
                 <div className="landing-btn">
                     <Button
-                        onClick={() => router.push('/gameid')}
-                        // onClick={() => router.push('/game')}
+                        // onClick={() => router.push('/gameid')}
+                        onClick={() => router.push('/game')}
                         className=""
                     >
                         Let&apos;s Go
