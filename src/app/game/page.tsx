@@ -58,7 +58,7 @@ const GamePage = () => {
         if (storedProfile) {
             setSelectedProfile(storedProfile);
             if (storedProfile !== 'Hospitality Professional') {
-                setQuestions(otherQuestions);
+                setQuestions(hospitalQuestions);
             }
         }
         setGameStarted(true);
